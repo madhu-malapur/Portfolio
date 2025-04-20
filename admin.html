@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Contact Management - Admin</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+    <!-- Admin Navigation -->
+    <nav class="admin-nav">
+        <div class="nav-content">
+            <div class="nav-left">
+                <h1>Contact Management</h1>
+            </div>
+            <div class="nav-right">
+                <span class="admin-email">admin@example.com</span>
+                <button class="logout-btn" id="logoutBtn">
+                    <i class="fas fa-sign-out-alt"></i>
+                    Logout
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="admin-main">
+        <div class="filters">
+            <div class="search-box">
+                <i class="fas fa-search"></i>
+                <input type="text" id="searchInput" placeholder="Search contacts...">
+            </div>
+            <select id="statusFilter">
+                <option value="all">All Status</option>
+                <option value="pending">Pending</option>
+                <option value="replied">Replied</option>
+            </select>
+        </div>
+
+        <div class="contacts-table-container">
+            <table id="contactsTable">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Message</th>
+                        <th>Status</th>
+                        <th>Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody id="contactsTableBody">
+                    <!-- Contacts will be loaded here dynamically -->
+                </tbody>
+            </table>
+        </div>
+
+        <div class="pagination">
+            <div class="pagination-info">
+                Showing <span id="currentPage">1</span> of <span id="totalPages">1</span>
+            </div>
+            <div class="pagination-controls">
+                <button class="pagination-btn" id="prevPage" disabled>
+                    <i class="fas fa-chevron-left"></i>
+                    Previous
+                </button>
+                <button class="pagination-btn" id="nextPage" disabled>
+                    Next
+                    <i class="fas fa-chevron-right"></i>
+                </button>
+            </div>
+        </div>
+    </main>
+
+    <!-- View Contact Modal -->
+    <div class="modal" id="viewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Contact Details</h2>
+                <button class="close-modal" id="closeViewModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="contact-details">
+                    <div class="detail-group">
+                        <label>Name:</label>
+                        <p id="viewName"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label>Email:</label>
+                        <p id="viewEmail"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label>Message:</label>
+                        <p id="viewMessage"></p>
+                    </div>
+                    <div class="detail-group">
+                        <label>Date:</label>
+                        <p id="viewDate"></p>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="replyBtn">
+                    <i class="fas fa-reply"></i>
+                    Reply
+                </button>
+                <button class="danger-btn" id="deleteBtn">
+                    <i class="fas fa-trash"></i>
+                    Delete
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Reply Modal -->
+    <div class="modal" id="replyModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Reply to Contact</h2>
+                <button class="close-modal" id="closeReplyModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="replyForm">
+                    <div class="form-group">
+                        <label for="replyMessage">Your Reply:</label>
+                        <textarea id="replyMessage" rows="6" required></textarea>
+                    </div>
+                </form>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="previewBtn">
+                    <i class="fas fa-eye"></i>
+                    Preview
+                </button>
+                <button class="primary-btn" id="sendReplyBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    Send Reply
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Preview Modal -->
+    <div class="modal" id="previewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2>Preview Reply</h2>
+                <button class="close-modal" id="closePreviewModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <div class="preview-content">
+                    <div class="preview-header">
+                        <p><strong>To:</strong> <span id="previewEmail"></span></p>
+                        <p><strong>Subject:</strong> Re: Contact Form Submission</p>
+                    </div>
+                    <div class="preview-message" id="previewMessage"></div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="secondary-btn" id="backToEditBtn">
+                    <i class="fas fa-edit"></i>
+                    Back to Edit
+                </button>
+                <button class="primary-btn" id="confirmSendBtn">
+                    <i class="fas fa-paper-plane"></i>
+                    Confirm & Send
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <script src="admin.js"></script>
+</body>
+</html> 
